@@ -56,6 +56,10 @@ CGerberCommand* CGerberCommand::Create(CGerberParser* pParser, CGerberState* pSt
 					std::string strComment;
 					while (ch != '*')
 					{
+						if (pStream->AtEOF())
+						{
+							throw "Unterminated G04 comment";
+						}
 						ch = pStream->GetChar();
 						if (ch != '*')
 						{
